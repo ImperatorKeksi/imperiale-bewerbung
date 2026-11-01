@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bewerbung: Imperator Sheev Palpatine // Nico Kaschube</title>
+  <meta name="description" content="Offizielle Lore-Charakter Bewerbung als Imperator Sheev Palpatine (Darth Sidious) von Nico Kaschube (Imperator Keksi) für den Server 'Aufbau des Imperiums'.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%230b0d13' stroke='%23e01a22' stroke-width='4'/><circle cx='50' cy='50' r='18' fill='%23e01a22'/><path d='M50 5 L50 25 M50 75 L50 95 M5 50 L25 50 M75 50 L95 50 M18 18 L32 32 M68 68 L82 82 M18 82 L32 68 M68 32 L82 18' stroke='%23e01a22' stroke-width='5'/></svg>">
+</head>
+<body class="sith-mode">
+  <!-- Background Canvas for Space & Lightning FX -->
+  <canvas id="starfield-canvas"></canvas>
+  <canvas id="lightning-canvas"></canvas>
+
+  <!-- Flash Effect Overlay (Original aus imperiale-bewerbungafsafa) -->
+  <div id="fx-flash"></div>
+
+  <!-- Epische Imperiale Startsequenz (Original fx-intro) -->
+  <div id="fx-intro">
+    <div>
+      <div class="l a" id="fx1">ES IST AN DER ZEIT …</div>
+      <div class="l b" id="fx2">AUFBAU DES IMPERIUMS · BEWERBUNG VON IMPERATOR KEKSI</div>
+      <div class="intro-actions-wrap" id="introActionsWrap">
+        <button class="fxb epic-btn" id="fx-go" type="button">
+          ⚡ DAS IMPERIUM AUFERSTEHEN LASSEN ⚡
+        </button>
+        <button class="fxb alt sub-btn" id="fx-go2" type="button">
+          Bewerbung direkt ansehen →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scanlines & Ambient Overlay -->
+  <div class="crt-overlay"></div>
+  <div class="vignette"></div>
+
+  <!-- Ambient Audio Indicator / Control HUD -->
+  <div class="audio-control-bar" id="audioBar">
+    <div class="audio-info">
+      <span class="pulse-dot"></span>
+      <span class="audio-label">HOLONET-AUDIO:</span>
+      <span id="audioStatusText">AKTIV // IMPERIAL MARCH & SITH-EFFEKTE</span>
+    </div>
+    <div class="audio-actions">
+      <button id="toggleAudioBtn" class="hud-mini-btn" title="Imperiale Tonkulisse ein-/ausschalten">
+        <span class="btn-icon">🔊</span> <span class="btn-text">Sound: AN</span>
+      </button>
+      <button id="modeToggleBtn" class="hud-mini-btn cookie-glow" title="Zwischen Sith-Doktrin und Keksi-Modus wechseln">
+        <span class="btn-icon">🍪</span> <span class="btn-text">Keksi-Modus: AUS</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="imperial-header">
+    <div class="header-inner">
+      <div class="imperial-brand">
+        <div class="cog-logo">
+          <svg viewBox="0 0 100 100" class="cog-svg">
+            <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="4"/>
+            <circle cx="50" cy="50" r="22" fill="currentColor"/>
+            <path d="M50 4 L50 24 M50 76 L50 96 M4 50 L24 50 M76 50 L96 50 M17 17 L31 31 M69 69 L83 83 M17 83 L31 69 M69 31 L83 17" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-sub">GALAKTISCHES IMPERIUM // HOLONET COG-66</span>
+          <span class="brand-title">AUFBAU DES IMPERIUMS</span>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#dossier" class="nav-item active"><span class="nav-num">01</span> Dossier</a>
+        <a href="#ooc-daten" class="nav-item"><span class="nav-num">02</span> OOC & Zeiten</a>
+        <a href="#warum-lore" class="nav-item"><span class="nav-num">03</span> Warum Lore-Char?</a>
+        <a href="#warum-ich" class="nav-item"><span class="nav-num">04</span> Warum Du?</a>
+        <a href="#rp-plaene" class="nav-item"><span class="nav-num">05</span> RP-Pläne</a>
+        <a href="#lore" class="nav-item"><span class="nav-num">06</span> Lore & Sidious</a>
+        <a href="#simulator" class="nav-item"><span class="nav-num">07</span> Holo-Terminal</a>
+        <a href="#abschluss" class="nav-item"><span class="nav-num">08</span> Schlusswort</a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="copyDiscordBtn" class="action-btn copy-btn" title="Bewerbungstext im Discord-Format kopieren">
+          <span class="btn-icon">📋</span> Discord-Text
+        </button>
+        <button id="order66QuickBtn" class="action-btn order66-btn" title="Order 66 ausführen">
+          <span class="btn-icon">⚡</span> Order 66
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <!-- Hero / Dossier Section -->
+    <section id="dossier" class="section hero-section">
+      <div class="dossier-grid">
+        <!-- Left: Holo Portrait & Metadata Frame -->
+        <div class="dossier-visual">
+          <div class="holo-frame">
+            <div class="corner corner-tl"></div>
+            <div class="corner corner-tr"></div>
+            <div class="corner corner-bl"></div>
+            <div class="corner corner-br"></div>
+            <div class="holo-scan"></div>
+            
+            <div class="portrait-container">
+              <img src="palpatine-throne.jpg" alt="Imperator Sheev Palpatine auf dem Thron" class="throne-img" id="heroImage">
+              <div class="portrait-gradient"></div>
+              <div class="holo-badge">
+                <span class="badge-icon">⚡</span>
+                <span class="badge-text">STATUS: SUPREME CHANCELLOR → EMPEROR</span>
+              </div>
+            </div>
+
+            <!-- Datapad Diagnostics HUD -->
+            <div class="hud-stats-panel">
+              <div class="hud-stat">
+                <span class="stat-name">SITH-IDENTITÄT</span>
+                <span class="stat-val glow-red">DARTH SIDIOUS</span>
+              </div>
+              <div class="hud-stat">
+                <span class="stat-name">BEWERBER</span>
+                <span class="stat-val">NICO KASCHUBE</span>
+              </div>
+              <div class="hud-stat">
+                <span class="stat-name">ALIASES</span>
+                <span class="stat-val glow-gold">IMPERATOR KEKSI // COOKIE MILKY</span>
+              </div>
+              <div class="hud-stat">
+                <span class="stat-name">ZIEL-SERVER</span>
+                <span class="stat-val glow-cyan">AUFBAU DES IMPERIUMS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Official Transmission Letter -->
+        <div class="dossier-intro">
+          <div class="security-banner">
+            <div class="sec-left">
+              <span class="sec-code">FREIGABE: SITH-RAT // OBSIDIAN-ALPHA</span>
+              <span class="sec-stamp">LORE-CHARAKTER-BEWERBUNG</span>
+            </div>
+            <div class="sec-right">
+              <span class="keksi-tag">🍪 KEKSE INKLUSIVE</span>
+            </div>
+          </div>
+
+          <h1 class="hero-title">
+            <span class="title-sub">BEWERBUNG ZUM LORE-CHARAKTER</span>
+            <span class="title-main">IMPERATOR SHEEV PALPATINE</span>
+            <span class="title-alias">alias Darth Sidious // „Imperator Keksi“</span>
+          </h1>
+
+          <div class="quote-box">
+            <div class="quote-symbol">„</div>
+            <p class="quote-text">
+              Es ist an der Zeit, dass die Galaxis endlich wieder in geordneten Verhältnissen lebt.
+              Zu viele Rebellen, zu wenig Kekse und eindeutig zu wenig imperiale Führung!
+            </p>
+            <span class="quote-author">— Nico Kaschube (Imperator Keksi)</span>
+          </div>
+
+          <p class="hero-description">
+            Sehr geehrtes Serverteam von <strong>Aufbau des Imperiums</strong>, hiermit bewerbe ich mich offiziell als Lore-Charakter für die Rolle des Imperators. 
+            Ich möchte nicht bloß einen Titel tragen, sondern eine der vielschichtigsten, manipulativsten und einflussreichsten Ikonen des Star-Wars-Universums auf eurem Server mit Leben, Atmosphäre und erstklassigem Roleplay füllen.
+          </p>
+
+          <!-- Core Attributes Quick Grid -->
+          <div class="traits-grid">
+            <div class="trait-card" data-sound="lightning">
+              <div class="trait-icon">⚡</div>
+              <div class="trait-content">
+                <h4>Strategische Tiefe</h4>
+                <p>Langfristiges Intrigenspiel statt impulsiver Gewaltausbrüche.</p>
+              </div>
+            </div>
+            <div class="trait-card" data-sound="beep">
+              <div class="trait-icon">🏛️</div>
+              <div class="trait-content">
+                <h4>Ruhige Autorität</h4>
+                <p>Ein Imperator muss nicht schreien, um gehört und gefürchtet zu werden.</p>
+              </div>
+            </div>
+            <div class="trait-card" data-sound="crunch">
+              <div class="trait-icon">🍪</div>
+              <div class="trait-content">
+                <h4>Der Keksi-Faktor</h4>
+                <p>Gesunder Humor & sympathische Nähe, die das Server-Klima bereichert.</p>
+              </div>
+            </div>
+            <div class="trait-card" data-sound="power">
+              <div class="trait-icon">🌌</div>
+              <div class="trait-content">
+                <h4>Community First</h4>
+                <p>Möglichkeiten und Bühnen für Mitspieler, Offiziere & Truppler schaffen.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="cta-row">
+            <a href="#ooc-daten" class="btn primary-btn">
+              <span class="btn-text">Dossier öffnen: OOC & Zeiten</span>
+              <span class="btn-arrow">→</span>
+            </a>
+            <button id="playQuoteBtn" class="btn secondary-btn" data-sound="good">
+              <span class="btn-icon">🎙️</span>
+              <span class="btn-text">„Good, good...“ abspielen</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PFLICHTANGABE 1 & 2: OOC INFOS & ONLINE-ZEITEN [GOOGLE DOCS] -->
+    <section id="ooc-daten" class="section content-section">
+      <div class="section-header">
+        <span class="section-tag">PFLICHTANGABE [GOOGLE DOCS] // BEWERBER-PROFIL & AKTIVITÄT</span>
+        <h2 class="section-title">OOC Infos & Online-Zeiten</h2>
+        <div class="title-underline"></div>
+        <p class="section-subtitle">
+          Persönliche Daten des Bewerbers, Roleplay-Erfahrungen und wöchentliche Aktivitätszeiten auf dem Server.
+        </p>
+      </div>
+
+      <div class="ooc-grid">
+        <!-- OOC Infos Panel -->
+        <div class="card-panel">
+          <div class="panel-header">
+            <span class="duty-badge">PFLICHTANGABE</span>
+            <span class="panel-id">OOC-DATA-01</span>
+          </div>
+          <div class="panel-body">
+            <h3>Out of Character (OOC) Informationen</h3>
+            <p>
+              Hier finden Sie alle offiziellen Real-Life- und Spieler-Informationen zu meiner Person:
+            </p>
+
+            <div class="ooc-list">
+              <div class="ooc-item">
+                <span class="ooc-label">Real-Life Name</span>
+                <span class="ooc-val"><strong>Nico Kaschube</strong></span>
+              </div>
+              <div class="ooc-item">
+                <span class="ooc-label">Alter</span>
+                <span class="ooc-val"><strong>20 Jahre</strong> (Volljährig & geistige Reife)</span>
+              </div>
+              <div class="ooc-item">
+                <span class="ooc-label">Beruf / Ausbildung</span>
+                <span class="ooc-val"><strong>Ausbildung zum Fachpraktiker für IT-Systemelektronik</strong></span>
+              </div>
+              <div class="ooc-item">
+                <span class="ooc-label">Entwickler-Profil</span>
+                <span class="ooc-val"><strong>Full Stack Developer & Programmierer</strong> (Web-Entwicklung, Frontend, Backend & IT-Systeme)</span>
+              </div>
+              <div class="ooc-item">
+                <span class="ooc-label">Discord-Tag / Kontakt</span>
+                <span class="ooc-val"><strong>Imperator Keksi</strong> / <code>Cookie Milky</code></span>
+              </div>
+              <div class="ooc-item">
+                <span class="ooc-label">Hobbys & Interessen</span>
+                <span class="ooc-val">Inline-Skates fahren 🛼, Programmieren & Full Stack Development, Star Wars Lore & Filme, Gaming, Community-Events & Keks-Verkostung 🍪</span>
+              </div>
+              <div class="ooc-item">
+                <span class="ooc-label">RP-Erfahrung</span>
+                <span class="ooc-val">Mehrjährige Erfahrung im Star Wars Roleplay (Militär-RP, Sith-Ordnung, Event-Gestaltung & Führungspositionen). Vertraut mit Befehlsketten, seriösem Auftreten und dem Schaffen spannender Spielsituationen für Mitspieler.</span>
+              </div>
+              <div class="ooc-item">
+                <span class="ooc-label">Persönliche Stärken</span>
+                <span class="ooc-val">Zuverlässigkeit, hohe Lore-Treue, Geduld, ausgeprägte Kommunikationsfähigkeit und ein gesunder Humor abseits ernster RP-Szenarien.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Online-Zeiten Panel -->
+        <div class="card-panel">
+          <div class="panel-header">
+            <span class="duty-badge">PFLICHTANGABE</span>
+            <span class="panel-id">TIME-SCHEDULE-02</span>
+          </div>
+          <div class="panel-body">
+            <h3>Wöchentliche Online-Zeiten</h3>
+            <p>
+              Feste und verlässliche Präsenzzeiten auf dem Server <strong>Aufbau des Imperiums</strong>:
+            </p>
+
+            <div class="times-table-wrap">
+              <table class="times-table">
+                <thead>
+                  <tr>
+                    <th>Wochentag</th>
+                    <th>Uhrzeit (Präsenz)</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="day-badge">Montag</span></td>
+                    <td>17:00 – 22:30 Uhr</td>
+                    <td><span class="status-active">Verfügbar</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="day-badge">Dienstag</span></td>
+                    <td>17:00 – 22:30 Uhr</td>
+                    <td><span class="status-active">Verfügbar</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="day-badge">Mittwoch</span></td>
+                    <td>17:00 – 22:30 Uhr</td>
+                    <td><span class="status-active">Verfügbar</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="day-badge">Donnerstag</span></td>
+                    <td>17:00 – 22:30 Uhr</td>
+                    <td><span class="status-active">Verfügbar</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="day-badge">Freitag</span></td>
+                    <td>16:30 – 01:00+ Uhr</td>
+                    <td><span class="status-active">Open End</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="day-badge">Samstag</span></td>
+                    <td>14:00 – 01:00+ Uhr</td>
+                    <td><span class="status-active">Open End</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="day-badge">Sonntag</span></td>
+                    <td>14:00 – 22:30 Uhr</td>
+                    <td><span class="status-active">Verfügbar</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="times-footer-note">
+              ⚡ <strong>Wöchentliche Aktivität:</strong> ca. 35 – 45+ Stunden.<br>
+              Bei wichtigen Server-Events, Audienzen, Notfall-Besprechungen oder Krisen-Einsätzen bin ich zeitlich flexibel und über Discord nahezu durchgehend erreichbar.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PFLICHTANGABE 3: WARUM DER LORE CHAR? [GOOGLE DOCS] -->
+    <section id="warum-lore" class="section content-section alternate-bg">
+      <div class="section-header">
+        <span class="section-tag">PFLICHTANGABE [GOOGLE DOCS] // CHARAKTERWAHL</span>
+        <h2 class="section-title">Warum der Lore-Charakter (Palpatine)?</h2>
+        <div class="title-underline"></div>
+        <p class="section-subtitle">
+          Die Faszination für Darth Sidious – Warum ausgerechnet Sheev Palpatine als Lore-Charakter?
+        </p>
+      </div>
+
+      <div class="motivation-grid">
+        <div class="motivation-main card-panel">
+          <div class="panel-header">
+            <span class="duty-badge">PFLICHTANGABE</span>
+            <span class="panel-id">LORE-REASON-01</span>
+          </div>
+          <div class="panel-body">
+            <h3>Der Architekt der Galaxis</h3>
+            <p>
+              Warum bewerbe ich mich ausgerechnet für <strong>Imperator Sheev Palpatine</strong> und nicht für einen Standard-Sith oder einen imperialen Offizier?
+            </p>
+            <p>
+              Für mich ist Palpatine die mit Abstand faszinierendste Figur der gesamten Star-Wars-Saga. Er ist kein Sith, der blindlings mit dem Lichtschwert durch die Gänge rennt oder seine Untergebenen aus purer Laune hinrichtet. Seine wahre Macht liegt in seiner <strong>Geduld, seiner subtilen Manipulation und seiner politischen Brillanz</strong>.
+            </p>
+            <p>
+              Er hat über Jahrzehnte hinweg die gesamte Galaxis wie ein gigantisches Schachspiel gelenkt: Er war gleichzeitig der ehrenwerte Oberste Kanzler der Republik und im Verborgenen Darth Sidious. Diese unglaubliche Dualität im Roleplay mit Leben zu füllen, ist eine unvergleichliche schauspielerische und erzählerische Herausforderung, die ich mit größtem Respekt vor der Lore angehen möchte.
+            </p>
+            <div class="quote-callout">
+              <p>„Palpatine zu spielen bedeutet nicht, der Lauteste auf dem Server zu sein. Es bedeutet, der Faden zu sein, der alle Ereignisse im Hintergrund zusammenhält.“</p>
+            </div>
+            <p>
+              Als Lore-Charakter möchte ich auf <strong>Aufbau des Imperiums</strong> eine echte Atmosphäre schaffen: Ehrfurcht, wenn der Thronsaal betreten wird, diplomatische Verhandlungen mit Tiefgang und das Gefühl, dass jede Entscheidung Gewicht für die Zukunft des Servers hat.
+            </p>
+          </div>
+        </div>
+
+        <div class="motivation-pillars">
+          <div class="pillar-card card-panel">
+            <div class="pillar-icon">🏛️</div>
+            <div class="pillar-text">
+              <h4>Politische Staatskunst</h4>
+              <p>Palpatine ist das Staatsoberhaupt. Er verkörpert die imperiale Bürokratie, Gesetzgebung und die Neue Ordnung – nicht bloß rohe Gewalt.</p>
+            </div>
+          </div>
+          <div class="pillar-card card-panel">
+            <div class="pillar-icon">🎭</div>
+            <div class="pillar-text">
+              <h4>Tiefe & Mysterium</h4>
+              <p>Die dunkle Seite der Macht als ehrfürchtiges Geheimnis behandeln, das Neugier weckt und Sith-Schülern echte RP-Lehren bietet.</p>
+            </div>
+          </div>
+          <div class="pillar-card card-panel">
+            <div class="pillar-icon">🌌</div>
+            <div class="pillar-text">
+              <h4>Dreh- und Angelpunkt für Events</h4>
+              <p>Vom Thronsaal aus können imperiale Feldzüge, Flottenmanöver und Sektor-Konflikte für die gesamte Community ins Rollen gebracht werden.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PFLICHTANGABE 4: WARUM DU? [GOOGLE DOCS] -->
+    <section id="warum-ich" class="section content-section">
+      <div class="section-header">
+        <span class="section-tag">PFLICHTANGABE [GOOGLE DOCS] // BEWERBER-MOTIVATION</span>
+        <h2 class="section-title">Warum Du? (Warum Nico Kaschube?)</h2>
+        <div class="title-underline"></div>
+        <p class="section-subtitle">
+          Die Philosophie hinter der Bewerbung – Größenwahn mit Köpfchen, dunkle Seite mit System und Loyalitätskekse.
+        </p>
+      </div>
+
+      <div class="motivation-grid">
+        <div class="motivation-main card-panel">
+          <div class="panel-header">
+            <div class="panel-badge">GALAKTISCHE ERFOLGSGESCHICHTE</div>
+            <span class="panel-id">SEC-01/NK</span>
+          </div>
+          <div class="panel-body">
+            <h3>Ein Imperator namens Keksi</h3>
+            <p>
+              Mein Name ist <strong>Nico Kaschube</strong>, wobei mich die meisten wahrscheinlich eher unter meinem wohlverdienten Titel <strong>Imperator Keksi</strong> kennen. Manche nennen mich auch <strong>Cookie Milky</strong> oder schlicht <strong>Kekse</strong>.
+            </p>
+            <p>
+              Und seien wir ehrlich: Ein Imperator mit dem Namen Keksi? Das klingt doch bereits nach einer galaktischen Erfolgsgeschichte!
+            </p>
+            <p>
+              Hiermit möchte ich mich als Lore-Charakter für <strong>Imperator Sheev Palpatine</strong> bewerben. Ich möchte nicht nur einen Charakter spielen, sondern eine Persönlichkeit verkörpern, die das Star-Wars-Universum maßgeblich geprägt hat.
+            </p>
+            <div class="quote-callout">
+              <p>„Natürlich bringe ich dafür die nötige Portion Größenwahn, strategisches Denken und eine ordentliche Prise dunkle Seite mit. Die Kekse werden selbstverständlich nur bei entsprechender imperialer Loyalität verteilt.“</p>
+            </div>
+            <p>
+              Natürlich darf auch der typische Palpatine-Humor nicht fehlen. Ein gelegentliches <em>„Good, good!“</em> gehört schließlich zum guten Ton eines Sith-Lords.
+            </p>
+          </div>
+        </div>
+
+        <!-- Side Pillar Cards -->
+        <div class="motivation-pillars">
+          <div class="pillar-card card-panel">
+            <div class="pillar-icon">⚖️</div>
+            <div class="pillar-text">
+              <h4>Verantwortung statt Machtmissbrauch</h4>
+              <p>
+                Mir ist bewusst, dass Imperator Palpatine eine besondere Schlüsselposition einnimmt. Ich möchte nicht einfach nur den höchsten Rang besitzen, um anderen plumpe Befehle zu erteilen. Ich möchte eine Geschichte erzählen, Entscheidungen treffen und gemeinsam mit anderen Spielern ein fesselndes imperiales Roleplay aufbauen.
+              </p>
+            </div>
+          </div>
+
+          <div class="pillar-card card-panel">
+            <div class="pillar-icon">🧁</div>
+            <div class="pillar-text">
+              <h4>Das Bäckerei-Prinzip</h4>
+              <p>
+                <strong>„Denn was ist ein Imperium ohne seine Untergebenen? Richtig: Eine ziemlich große Bäckerei ohne Kundschaft!“</strong><br>
+                Mir ist essenziell wichtig, dass nicht nur ich Spaß habe, sondern dass jeder Spieler – vom Kadetten bis zum Flottenadmiral – bedeutsame Interaktionen und Entwicklungsmöglichkeiten erhält.
+              </p>
+            </div>
+          </div>
+
+          <div class="pillar-card card-panel">
+            <div class="pillar-icon">✨</div>
+            <div class="pillar-text">
+              <h4>Das richtige Keksrezept der Macht</h4>
+              <p>
+                Der Name Imperator Keksi ist fast eine göttliche Fügung. Vielleicht war die dunkle Seite der Macht die ganze Zeit nur auf der Suche nach dem richtigen Rezept, um Ordnung, Respekt und Spielspaß auf dem Server zu vereinen.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Meine Pläne für das Imperium (RP-Konzepte) -->
+    <section id="rp-plaene" class="section content-section alternate-bg">
+      <div class="section-header">
+        <span class="section-tag">AKTE II // ROLEPLAY-STRATEGIE</span>
+        <h2 class="section-title">Meine Pläne für das Imperium</h2>
+        <div class="title-underline"></div>
+        <p class="section-subtitle">
+          Ich möchte die Position des Imperators nutzen, um das Roleplay auf dem Server aktiv, abwechslungsreich und nachhaltig zu bereichern.
+        </p>
+      </div>
+
+      <div class="rp-plans-grid">
+        <div class="rp-plan-card" data-sound="beep">
+          <div class="card-glow"></div>
+          <div class="plan-num">01</div>
+          <div class="plan-icon">👑</div>
+          <h3>Regelmäßige imperiale Audienzen</h3>
+          <p>
+            Der Thronsaal wird kein toter Raum sein: Geplante und spontane Audienzen für Offiziere, Statthalter, Sith-Schüler und Diplomaten bieten stetige RP-Anlaufstellen.
+          </p>
+          <div class="plan-tags">
+            <span class="plan-tag">Thronsaal</span>
+            <span class="plan-tag">Interaktion</span>
+          </div>
+        </div>
+
+        <div class="rp-plan-card" data-sound="beep">
+          <div class="card-glow"></div>
+          <div class="plan-num">02</div>
+          <div class="plan-icon">📜</div>
+          <h3>Politische Gespräche & Dekrete</h3>
+          <p>
+            Diplomatie auf Augenhöhe und hinter verschlossenen Türen. Verhandlungen mit Sektorgouverneuren und hochrangigen Würdenträgern über Gesetze und imperiale Expansion.
+          </p>
+          <div class="plan-tags">
+            <span class="plan-tag">Politik</span>
+            <span class="plan-tag">Diplomatie</span>
+          </div>
+        </div>
+
+        <div class="rp-plan-card" data-sound="beep">
+          <div class="card-glow"></div>
+          <div class="plan-num">03</div>
+          <div class="plan-icon">🗺️</div>
+          <h3>Strategische Kriegsplanungen</h3>
+          <p>
+            Große Lagebesprechungen am Holotisch mit der imperialen Admiralität und Generalität. Truppenverlegungen, Anti-Guerilla-Operationen und Kampagnen gegen Rebellen.
+          </p>
+          <div class="plan-tags">
+            <span class="plan-tag">Militär</span>
+            <span class="plan-tag">Strategie</span>
+          </div>
+        </div>
+
+        <div class="rp-plan-card" data-sound="beep">
+          <div class="card-glow"></div>
+          <div class="plan-num">04</div>
+          <div class="plan-icon">🎖️</div>
+          <h3>Beförderungen & Auszeichnungen</h3>
+          <p>
+            Verdiente imperiale Mitglieder werden feierlich geehrt, befördert und mit kaiserlichen Dekreten ausgezeichnet. Anerkennung steigert Loyalität und Spielmotivation!
+          </p>
+          <div class="plan-tags">
+            <span class="plan-tag">Motivation</span>
+            <span class="plan-tag">Rangsystem</span>
+          </div>
+        </div>
+
+        <div class="rp-plan-card" data-sound="beep">
+          <div class="card-glow"></div>
+          <div class="plan-num">05</div>
+          <div class="plan-icon">🌌</div>
+          <h3>Entscheidungen über die Zukunft</h3>
+          <p>
+            Dynamisches Server-Geschehen: Richtungsweisende Entscheidungen, Reaktionen auf Server-Events, Ressourcenverteilung und der Bau imperialer Prestigeprojekte.
+          </p>
+          <div class="plan-tags">
+            <span class="plan-tag">Server-Events</span>
+            <span class="plan-tag">Lore-Impact</span>
+          </div>
+        </div>
+
+        <div class="rp-plan-card" data-sound="beep">
+          <div class="card-glow"></div>
+          <div class="plan-num">06</div>
+          <div class="plan-icon">⚡</div>
+          <h3>Spannungen: Militär, Sith & Senat</h3>
+          <p>
+            Fein austariertes Beziehungsgeflecht zwischen eiskalter Militärbürokratie, mystischen Sith-Interessen und ziviler Verwaltung, um facettenreiche Konflikte zu schüren.
+          </p>
+          <div class="plan-tags">
+            <span class="plan-tag">Tiefe</span>
+            <span class="plan-tag">Spannungsbogen</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Highlight Banner -->
+      <div class="interactive-decree-banner card-panel">
+        <div class="banner-content">
+          <div class="banner-badge">LEITMOTIV DES RP-KONZEPTS</div>
+          <h3>„Mir ist wichtig, dass die Spieler um mich herum interessante Möglichkeiten bekommen.“</h3>
+          <p>
+            Als Imperator stehe ich nicht isoliert an der Spitze. Meine Aufgabe ist es, als Spielleiter und Hauptmotor spannende Szenarien anzustoßen, an denen alle Ränge aktiv mitwirken können.
+          </p>
+        </div>
+        <div class="banner-action">
+          <button class="btn secondary-btn" id="openAudienceDemoBtn">
+            <span class="btn-icon">👁️</span> Muster-Audienz ansehen
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Wer ist eigentlich Palpatine? & Wie spiele ich ihn? -->
+    <section id="lore" class="section content-section">
+      <div class="section-header">
+        <span class="section-tag">AKTE III // LORE-WISSEN & CHARAKTERDARSTELLUNG</span>
+        <h2 class="section-title">Wer ist eigentlich dieser Palpatine?</h2>
+        <div class="title-underline"></div>
+        <p class="section-subtitle">
+          Fundiertes Star-Wars-Hintergrundwissen und die 5 Säulen meiner Charakterinterpretation.
+        </p>
+      </div>
+
+      <div class="lore-layout">
+        <!-- Left: Lore Dossier & Timeline -->
+        <div class="lore-bio card-panel">
+          <div class="panel-header">
+            <span class="panel-badge">ARCHIV-EINTRAG // NABOO BIS CORUSCANT</span>
+            <span class="panel-id">SITH-LORE-66</span>
+          </div>
+          <div class="panel-body">
+            <h3>Der Aufstieg des Meisters der Täuschung</h3>
+            <p>
+              <strong>Sheev Palpatine</strong>, besser bekannt als <strong>Darth Sidious</strong>, gehört zu den einflussreichsten und gefährlichsten Sith-Lords der gesamten galaktischen Geschichte.
+            </p>
+            <p>
+              Geboren auf der idyllischen Welt <strong>Naboo</strong>, begann sein Aufstieg zunächst auf dem scheinbar harmlosen Parkett der planetaren und galaktischen Politik. Als geheimer Schüler von <strong>Darth Plagueis dem Weisen</strong> erlernte er die tiefsten Geheimnisse der dunklen Seite der Macht und entwickelte sich zu einem unübertroffenen Meister der Manipulation, Täuschung und Geduld.
+            </p>
+            <p>
+              Unter seiner öffentlichen Identität als integrer Senator und späterer <strong>Oberster Kanzler</strong> gelang es ihm, die Galaktische Republik von innen heraus zu unterwandern, zu lenken und schließlich zu Fall zu bringen.
+            </p>
+            <p>
+              Die <strong>Klonkriege</strong> waren dabei das ultimative Meisterstück seines Plans: Während die Galaxis in Angst, Zerstörung und Chaos versank, sammelte Palpatine schrittweise Notstandsbefugnisse an, bis ihm die Senatoren schließlich mit tosendem Applaus die absolute Herrschaft übertrugen.
+            </p>
+            <p>
+              Mit der Ausrufung der Neuen Ordnung erklärte er die Gründung des <strong>Galaktischen Imperiums</strong> und ernannte sich selbst zum Imperator.
+            </p>
+            <div class="lore-quote">
+              <p>„Sein Ziel: eine Galaxis unter seiner Herrschaft, in der Ordnung herrscht und niemand auf die dumme Idee kommt, eine Rebellion zu gründen. Außer natürlich, man möchte Bekanntschaft mit der imperialen Sicherheitsabteilung machen.“</p>
+            </div>
+          </div>
+
+          <!-- Interactive Lore Timeline -->
+          <div class="timeline-container">
+            <h4 class="timeline-title">Chronologie des Aufstiegs</h4>
+            <div class="timeline-track">
+              <div class="timeline-node active" data-year="84 VSY" data-desc="Geburt auf Naboo, Ausbildung im Verborgenen unter Darth Plagueis.">
+                <span class="t-dot"></span>
+                <span class="t-label">Naboo</span>
+              </div>
+              <div class="timeline-node" data-year="32 VSY" data-desc="Invasion von Naboo geschürt. Wahl zum Obersten Kanzler der Republik.">
+                <span class="t-dot"></span>
+                <span class="t-label">Kanzler</span>
+              </div>
+              <div class="timeline-node" data-year="22–19 VSY" data-desc="Orchestrierung der Klonkriege als beide Seiten (Kanzler & Sidious).">
+                <span class="t-dot"></span>
+                <span class="t-label">Klonkriege</span>
+              </div>
+              <div class="timeline-node" data-year="19 VSY" data-desc="Order 66, Fall der Jedi & Ausrufung des Ersten Galaktischen Imperiums.">
+                <span class="t-dot"></span>
+                <span class="t-label">Order 66</span>
+              </div>
+              <div class="timeline-node" data-year="0 VSY+" data-desc="Herrschaft über den Todesstern und die Unterdrückung der Rebellion.">
+                <span class="t-dot"></span>
+                <span class="t-label">Imperator</span>
+              </div>
+            </div>
+            <div class="timeline-info-box" id="timelineInfo">
+              <strong id="timelineYear">84 VSY // DIE SCHATTENLEHRE</strong>
+              <p id="timelineText">Geburt auf Naboo, Ausbildung im Verborgenen unter Darth Plagueis und Erlernen der tiefsten Sith-Mysterien.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: "Wie würde ich Palpatine spielen?" 5 Pillars -->
+        <div class="lore-style card-panel">
+          <div class="panel-header">
+            <span class="panel-badge">ROLEPLAY-METHODIK</span>
+            <span class="panel-id">METHOD-SIDIOUS</span>
+          </div>
+          <div class="panel-body">
+            <h3>Wie würde ich Palpatine spielen?</h3>
+            <p class="highlight-lead">
+              <strong>„Ich möchte Palpatine nicht als jemanden darstellen, der permanent herumschreit und jedem seine Macht demonstriert. Ein echter Imperator muss nicht laut werden, damit andere zuhören.“</strong>
+            </p>
+            <p>
+              Seine wahre Stärke liegt in seiner beherrschten Ruhe, seinem strategischen Weitblick und seiner Gabe, Menschen wie Schachfiguren auf einem galaktischen Brett zu platzieren.
+            </p>
+
+            <div class="pillars-list">
+              <!-- Pillar 1 -->
+              <div class="style-item">
+                <div class="item-header">
+                  <span class="item-icon">🏛️</span>
+                  <h4>1. Politik & Staatskunst</h4>
+                </div>
+                <p>
+                  Gewichtige Entscheidungen treffen, hochrangige diplomatische Gespräche führen und stets die imperialen Staatsinteressen über Einzelschicksale stellen.
+                </p>
+              </div>
+
+              <!-- Pillar 2 -->
+              <div class="style-item">
+                <div class="item-header">
+                  <span class="item-icon">♟️</span>
+                  <h4>2. Subtile Manipulation</h4>
+                </div>
+                <p>
+                  Situationen geschickt lenken, Zwietracht säen, wo nötig, und langfristige Pläne verfolgen, sodass Untergebene glauben, es sei ihre eigene Idee gewesen.
+                </p>
+              </div>
+
+              <!-- Pillar 3 -->
+              <div class="style-item">
+                <div class="item-header">
+                  <span class="item-icon">👑</span>
+                  <h4>3. Unantastbare Autorität</h4>
+                </div>
+                <p>
+                  Ein würdevolles, furchteinflößendes Auftreten gegenüber Offizieren, Flottenführern, Sith und fremden Gesandten – durch Haltung, nicht durch Brüllen.
+                </p>
+              </div>
+
+              <!-- Pillar 4 -->
+              <div class="style-item">
+                <div class="item-header">
+                  <span class="item-icon">📐</span>
+                  <h4>4. Weitsichtige Strategie</h4>
+                </div>
+                <p>
+                  Die Entwicklung des Imperiums schrittweise vorantreiben, logistische und militärische Entscheidungen mit Bedacht und Konsequenz fällen.
+                </p>
+              </div>
+
+              <!-- Pillar 5 -->
+              <div class="style-item">
+                <div class="item-header">
+                  <span class="item-icon">⚡</span>
+                  <h4>5. Lore-treue Dunkle Seite</h4>
+                </div>
+                <p>
+                  Die Macht entsprechend der Star-Wars-Lore respektvoll behandeln und nicht als albernes Alltagsspielzeug für jede banale Situation missbrauchen.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Interaktives Holonet-Terminal (Keks-Logistik & Imperiales Soundboard) -->
+    <section id="simulator" class="section content-section alternate-bg">
+      <div class="section-header">
+        <span class="section-tag">AKTE IV // INTERAKTIVES HOLONET-TERMINAL</span>
+        <h2 class="section-title">Das imperiale Kontrollzentrum</h2>
+        <div class="title-underline"></div>
+        <p class="section-subtitle">
+          Keks-Logistik & imperiales Soundboard: Verwalten Sie die kaiserlichen Keks-Rationen und rufen Sie authentische Sprachübertragungen des Imperators ab!
+        </p>
+      </div>
+
+      <div class="terminal-grid">
+        <!-- Keks-Dispenser Minigame (Keks-Logistik) -->
+        <div class="dispenser-card card-panel">
+          <div class="panel-header">
+            <span class="panel-badge glow-gold">KEKS-LOGISTIK-TERMINAL</span>
+            <span class="panel-id">COOKIE-PROTOCOL</span>
+          </div>
+          <div class="dispenser-body">
+            <p class="dispenser-desc">
+              „Die Kekse werden selbstverständlich nur bei entsprechender imperialer Loyalität verteilt. Was ist ein Imperium ohne Untergebene? Eine Bäckerei ohne Kundschaft!“
+            </p>
+            
+            <div class="cookie-stat-row">
+              <div class="c-stat">
+                <span class="c-label">VERTEILTE KEKSE</span>
+                <span class="c-val glow-gold" id="cookieCounter">0</span>
+              </div>
+              <div class="c-stat">
+                <span class="c-label">LOYALITÄTS-RANG</span>
+                <span class="c-val glow-cyan" id="loyaltyRank">Rekrut</span>
+              </div>
+            </div>
+
+            <div class="dispenser-actions">
+              <button class="btn cookie-btn" id="giveCookieBtn">
+                <span class="btn-icon">🍪</span> Loyalitäts-Keks anfordern
+              </button>
+              <button class="btn sith-zap-btn" id="zapRebelBtn">
+                <span class="btn-icon">⚡</span> Rebellen-Spion zappen
+              </button>
+            </div>
+            <div class="dispenser-log" id="dispenserLog">
+              [SYSTEM]: Keks-Logistik bereit. Klicken Sie zur Ausgabe.
+            </div>
+          </div>
+        </div>
+
+        <!-- Soundboard & Quotes -->
+        <div class="soundboard-card card-panel">
+          <div class="panel-header">
+            <span class="panel-badge">IMPERIALES SOUNDBOARD</span>
+            <span class="panel-id">AUDIO-SYS-66</span>
+          </div>
+          <div class="soundboard-grid">
+            <button class="sound-pad" data-sound="good" title="Palpatine: Good, good...">
+              <span class="pad-icon">🎙️</span>
+              <span class="pad-label">„Good, good...“</span>
+            </button>
+            <button class="sound-pad" data-sound="unlimited" title="Palpatine: Unlimited Power!">
+              <span class="pad-icon">⚡</span>
+              <span class="pad-label">„Unlimited Power!“</span>
+            </button>
+            <button class="sound-pad" data-sound="doit" title="Palpatine: Do it.">
+              <span class="pad-icon">🗡️</span>
+              <span class="pad-label">„Do it.“</span>
+            </button>
+            <button class="sound-pad" data-sound="order66" title="Palpatine: Execute Order 66">
+              <span class="pad-icon">💀</span>
+              <span class="pad-label">„Order 66“</span>
+            </button>
+            <button class="sound-pad" data-sound="senate" title="Palpatine: I am the Senate">
+              <span class="pad-icon">🏛️</span>
+              <span class="pad-label">„I am the Senate“</span>
+            </button>
+            <button class="sound-pad" data-sound="skills" title="Palpatine: Power of the Dark Side">
+              <span class="pad-icon">🌌</span>
+              <span class="pad-label">„Dark Side Power“</span>
+            </button>
+            <button class="sound-pad" data-sound="foreseen" title="Palpatine: Everything is proceeding as I have foreseen">
+              <span class="pad-icon">👁️</span>
+              <span class="pad-label">„As foreseen“</span>
+            </button>
+            <button class="sound-pad" data-sound="laugh" title="Palpatine: Böses Sith-Lachen">
+              <span class="pad-icon">😈</span>
+              <span class="pad-label">Sith-Lachen</span>
+            </button>
+            <button class="sound-pad" data-sound="lightning" title="Echte Star Wars Machtblitze">
+              <span class="pad-icon">🌩️</span>
+              <span class="pad-label">Machtblitze</span>
+            </button>
+            <button class="sound-pad" data-sound="crunch" title="Knuspriger Keks-Biss">
+              <span class="pad-icon">🍪</span>
+              <span class="pad-label">Keks-Knuspern</span>
+            </button>
+            <button class="sound-pad" data-sound="march" title="The Imperial March Theme">
+              <span class="pad-icon">🎺</span>
+              <span class="pad-label">Imperial March</span>
+            </button>
+            <button class="sound-pad" data-sound="fanfare" title="Star Wars Thema">
+              <span class="pad-icon">⭐</span>
+              <span class="pad-label">Star Wars Thema</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PFLICHTANGABE 5: SCHLUSSWORT [GOOGLE DOCS] -->
+    <section id="abschluss" class="section content-section">
+      <div class="section-header">
+        <span class="section-tag">PFLICHTANGABE [GOOGLE DOCS] // SCHLUSSWORT & BESCHLUSS</span>
+        <h2 class="section-title">Schlusswort des Bewerbers</h2>
+        <div class="title-underline"></div>
+      </div>
+
+      <div class="conclusion-box card-panel">
+        <div class="imperial-watermark">
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="2"/>
+            <circle cx="50" cy="50" r="20" fill="currentColor"/>
+            <path d="M50 5 L50 25 M50 75 L50 95 M5 50 L25 50 M75 50 L95 50 M18 18 L32 32 M68 68 L82 82 M18 82 L32 68 M68 32 L82 18" stroke="currentColor" stroke-width="4"/>
+          </svg>
+        </div>
+
+        <div class="conclusion-text">
+          <p class="lead-conclusion">
+            Zum Abschluss möchte ich mich herzlich für die Zeit und Aufmerksamkeit bedanken, die ihr euch für meine Bewerbung nehmt.
+          </p>
+          <p>
+            Ich würde mich sehr darüber freuen, <strong>Imperator Sheev Palpatine</strong> auf eurem Server <strong>Aufbau des Imperiums</strong> verkörpern zu dürfen und gemeinsam mit der Community die Zukunft des Galaktischen Imperiums mit Spannung, Würde und unvergesslichen Momenten zu gestalten.
+          </p>
+          <div class="sith-blessing">
+            <span class="blessing-symbol">⚡</span>
+            <p>Möge die dunkle Seite der Macht mit euch sein.</p>
+          </div>
+          <div class="cookie-creed">
+            <p><strong>Und denkt immer daran:</strong></p>
+            <blockquote class="final-creed-quote">
+              „Die Galaxis gehört dem Imperium.<br>
+              Die Kekse gehören Imperator Keksi.“
+            </blockquote>
+          </div>
+
+          <div class="signoff-signature">
+            <div class="sig-details">
+              <span class="sig-salute">Mit imperialen Grüßen,</span>
+              <span class="sig-name">Nico Kaschube</span>
+              <span class="sig-titles">Imperator Keksi | Cookie Milky | Kekse</span>
+              <span class="sig-motto">Für das Imperium. Für die Ordnung. Für die Kekse! 🍪</span>
+            </div>
+            <div class="imperial-seal">
+              <div class="seal-inner">
+                <span>OFFIZIELLES SIEGEL</span>
+                <span class="seal-date">COG-66</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="imperial-footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <span class="footer-cog">⚙️</span>
+        <span class="footer-text">
+          Bewerbung als Lore-Charakter // Imperator Sheev Palpatine // Server: „Aufbau des Imperiums“
+        </span>
+      </div>
+      <div class="footer-center">
+        <span>Erstellt von Nico Kaschube (Imperator Keksi)</span>
+      </div>
+      <div class="footer-right">
+        <button id="scrollToTopBtn" class="scroll-top-btn" title="Nach oben">▲ Nach oben</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal: Muster-Audienz Vorschau -->
+  <div class="modal-backdrop" id="audienceModal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span class="modal-tag">RP-VORSCHAU</span>
+          <h3>Muster-Audienz im Thronsaal</h3>
+        </div>
+        <button class="modal-close" id="closeModalBtn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="rp-transcript">
+          <div class="rp-entry gm">
+            <span class="speaker">[Szenario]:</span>
+            <p>Die gewaltigen Panzertüren des imperialen Thronsaals öffnen sich mit einem leisen Zischen. Vor dem kreisrunden Sternenfenster dreht sich der Thron langsam zur Mitte...</p>
+          </div>
+          <div class="rp-entry palpatine">
+            <span class="speaker">Imperator Palpatine:</span>
+            <p><em>(mit leiser, bedächtiger Stimme, die Hände in den Ärmeln der dunklen Robe verborgen)</em> „Tretet näher, Commander. Euer Bericht über den Sektor Lothal hat meine Aufmerksamkeit erregt... Man berichtet mir von unerwarteten Verzögerungen.“</p>
+          </div>
+          <div class="rp-entry player">
+            <span class="speaker">Commander Vane:</span>
+            <p><em>(kniet nieder, die Stimme leicht zitternd)</em> „Mein Gebieter... Die lokalen Rebellen haben die Versorgungslinien sabotiert. Wir haben die Sicherheitskräfte verdoppelt, doch sie schlagen aus dem Schatten zu.“</p>
+          </div>
+          <div class="rp-entry palpatine">
+            <span class="speaker">Imperator Palpatine:</span>
+            <p><em>(ein feines, kaltes Lächeln zeichnet sich unter der Kapuze ab)</em> „Schatten... existieren nur dort, wo Licht geworfen wird, Commander. Ihr sollt nicht mehr Truppen schicken. Ihr sollt ihnen die Hoffnung nehmen. Entzieht ihnen die Nachschublager. Wer sich fügt, wird reich belohnt... Wer rebelliert, wird als Exempel statuiert. Habt Ihr mich verstanden?“</p>
+          </div>
+          <div class="rp-entry player">
+            <span class="speaker">Commander Vane:</span>
+            <p>„Wie Ihr befehlt, mein Imperator! Für das Imperium!“</p>
+          </div>
+          <div class="rp-entry palpatine keksi-flair">
+            <span class="speaker">Imperator Palpatine / Keksi:</span>
+            <p><em>(hebt leicht die Hand, ein zustimmendes Nicken)</em> „Good... good. Und Commander? Wenn die Mission erfolgreich ist... steht Euch eine Ration aus der kaiserlichen Keks-Reserve zu. Enttäuscht mich nicht.“</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn secondary-btn" id="closeModalBtn2">Schließen</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Copy Discord Text -->
+  <div class="modal-backdrop" id="discordModal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span class="modal-tag">EXPORT</span>
+          <h3>Bewerbungstext für Discord / Forum</h3>
+        </div>
+        <button class="modal-close" id="closeDiscordModalBtn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-hint">Dieser Text ist mit Discord-Markdown vorformatiert und kann direkt mit einem Klick in eure Zwischenablage kopiert werden:</p>
+        <textarea id="discordTextarea" readonly class="discord-textarea"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button class="btn primary-btn" id="doCopyDiscordBtn">
+          <span class="btn-icon">📋</span> Text jetzt kopieren
+        </button>
+        <button class="btn secondary-btn" id="closeDiscordModalBtn2">Schließen</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toastMessage">Benachrichtigung</div>
+
+  <!-- Audio Synthesizer & Logic -->
+  <script src="script.js"></script>
+</body>
+</html>
