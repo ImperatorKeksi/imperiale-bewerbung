@@ -1008,41 +1008,33 @@ document.addEventListener('DOMContentLoaded', () => {
   if (it && !rm) {
     document.body.style.overflow = 'hidden';
 
-    // Choreografie mit echten Star Wars Blitzen (im Intro MIT Ton)
-    setTimeout(() => { strike(window.innerWidth * 0.5, 1, true); }, 500);
-    setTimeout(() => {
-      const f1 = document.getElementById('fx1');
-      if (f1) f1.classList.add('on');
-      strike(window.innerWidth * 0.3, 1, true);
-    }, 1300);
-    setTimeout(() => {
-      const f2 = document.getElementById('fx2');
-      if (f2) f2.classList.add('on');
-    }, 2600);
-    setTimeout(() => {
-      strike(window.innerWidth * 0.7, 1, true);
-      const b1 = document.getElementById('fx-go');
-      const b2 = document.getElementById('fx-go2');
-      if (b1) b1.classList.add('on');
-      if (b2) b2.classList.add('on');
-    }, 3600);
-
     const b1 = document.getElementById('fx-go');
     const b2 = document.getElementById('fx-go2');
     if (b1) b1.addEventListener('click', (e) => { e.stopPropagation(); enter(); });
     if (b2) b2.addEventListener('click', (e) => { e.stopPropagation(); enter(); });
 
-    // Klick auf den Bildschirm betritt ebenfalls
+    // Klick auf den Bildschirm oder Tastendruck betritt die Seite sofort
     it.addEventListener('click', (e) => {
       if (e.target !== b1 && e.target !== b2) {
         enter();
       }
     });
 
-    // Automatischer Übergang nach 25 Sekunden falls nichts angeklickt wird
+    window.addEventListener('keydown', (e) => {
+      if (!hasEntered && (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape')) {
+        enter();
+      }
+    }, { once: true });
+
+    // Optionaler Blitz zur Untermalung kurz nach Start
+    setTimeout(() => {
+      if (!hasEntered) strike(window.innerWidth * 0.5, false, false);
+    }, 400);
+
+    // Automatischer sanfter Übergang nach 7 Sekunden falls keine Interaktion
     setTimeout(() => {
       if (!hasEntered) enter();
-    }, 25000);
+    }, 7000);
   } else if (it) {
     enter();
   }
