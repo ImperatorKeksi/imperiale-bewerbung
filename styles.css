@@ -331,17 +331,6 @@ body {
   transition: var(--transition);
 }
 
-.copy-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: var(--text-main);
-}
-.copy-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.3);
-}
-
 .order66-btn {
   background: linear-gradient(135deg, #8b0000, #e01a22);
   border: 1px solid var(--imperial-red-bright);
@@ -1619,13 +1608,6 @@ body {
   transform: scale(1.04);
 }
 
-.copy-discord-large {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  padding: 14px 20px;
-}
-
 /* Footer */
 .imperial-footer {
   position: relative;
@@ -1802,32 +1784,6 @@ body {
 .rp-entry.palpatine .speaker { color: var(--imperial-red-bright); }
 .rp-entry.player .speaker { color: var(--holo-cyan); }
 .rp-entry.keksi-flair .speaker { color: var(--sith-gold-bright); }
-
-/* Discord Textarea */
-.modal-hint {
-  font-size: 14px;
-  color: var(--text-muted);
-  margin-bottom: 12px;
-}
-
-.discord-textarea {
-  width: 100%;
-  height: 320px;
-  background: #06090f;
-  border: 1px solid rgba(224, 26, 34, 0.3);
-  border-radius: var(--radius-sm);
-  color: #e6edf3;
-  font-family: var(--font-mono);
-  font-size: 13px;
-  padding: 14px;
-  resize: vertical;
-  line-height: 1.5;
-}
-
-.discord-textarea:focus {
-  outline: none;
-  border-color: var(--imperial-red-bright);
-}
 
 /* Decree Certificate Modal Styling */
 .decree-window {

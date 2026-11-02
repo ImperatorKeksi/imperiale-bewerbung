@@ -54,8 +54,6 @@ Entwickelt mit modernstem Vanilla Web-Stack (HTML5, modern CSS3, Canvas 2D Physi
   - Rations-Zähler, Minigame mit Krümel-Beseitigung und schwebende Keks-Partikel per Tastendruck.
 - **Flüssige Sprachausgabe:**
   - Automatische Bereinigung von Abkürzungen für natürliche Aussprache im interaktiven Audienz-Simulator.
-- **1-Klick Discord-Export:**
-  - Komplette Bewerbung formatiert als Markdown mit einem Klick in die Zwischenablage kopieren.
 
 ---
 

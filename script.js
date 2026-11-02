@@ -795,133 +795,40 @@ function setupTimeline() {
 }
 
 // ===================================================================
-// 10. MODALS & DISCORD TEXT EXPORT
+// 10. MODALS (AUDIENZ-DEMO)
 // ===================================================================
-const discordTemplateText = `🍪 **Bewerbung als Lore-Charakter – Imperator Sheev Palpatine**
-
-**Server:** Aufbau des Imperiums
-**Bewerber:** Nico Kaschube
-**Auch bekannt als:** Imperator Keksi, Cookie Milky oder einfach Kekse
-**Gewünschter Charakter:** Imperator Sheev Palpatine
-**Sith-Identität:** Darth Sidious
-
----
-
-### 📋 1. OOC Infos (Out of Character) [Pflichtangabe]
-- **Real-Life Name:** Nico Kaschube
-- **Alter:** 20 Jahre (Volljährig & geistige Reife)
-- **Beruf / Ausbildung:** Ausbildung zum Fachpraktiker für IT-Systemelektronik
-- **Entwickler-Profil:** Full Stack Developer & Programmierer (Web-Entwicklung, Frontend, Backend & IT-Systeme)
-- **Discord-Tag / Kontakt:** Imperator Keksi (\`Cookie Milky\`)
-- **Hobbys & Interessen:** Inline-Skates fahren 🛼, Programmieren & Full Stack Development, Star Wars Lore & Filme, Gaming, Community-Events & Keks-Verkostung 🍪
-- **RP-Erfahrung:** Mehrjährige Erfahrung im Star Wars Roleplay (Militär-RP, Sith-Ordnung, Event-Gestaltung & Führungspositionen). Vertraut mit Befehlsketten, Thronsaal-Etikette und dem Schaffen spannender Spielsituationen für Mitspieler.
-- **Charakterliche Stärken:** Zuverlässigkeit, hohe Lore-Treue, Geduld, Kommunikationsfähigkeit und ein gesunder Humor abseits ernster RP-Szenarien.
-
----
-
-### ⏰ 2. Wöchentliche Online-Zeiten [Pflichtangabe]
-- **Montag:** 17:00 – 22:30 Uhr
-- **Dienstag:** 17:00 – 22:30 Uhr
-- **Mittwoch:** 17:00 – 22:30 Uhr
-- **Donnerstag:** 17:00 – 22:30 Uhr
-- **Freitag:** 16:30 – 01:00+ Uhr (Open End)
-- **Samstag:** 14:00 – 01:00+ Uhr (Open End)
-- **Sonntag:** 14:00 – 22:30 Uhr
-*Wöchentliche Aktivität:* ca. 35 – 45+ Stunden (bei Events flexibel anpassbar, über Discord stets erreichbar).
-
----
-
-### ⚡ 3. Warum der Lore Char? (Imperator Palpatine) [Pflichtangabe]
-Warum bewerbe ich mich ausgerechnet für **Imperator Sheev Palpatine** und nicht für einen Standard-Sith oder Offizier?
-Für mich ist Palpatine die mit Abstand faszinierendste Figur der gesamten Star-Wars-Saga. Er ist kein Sith, der blindlings mit dem Lichtschwert um sich schlägt, sondern der ultimative Stratege und Puppenspieler der Galaxis. Seine Stärke liegt in seiner beherrschten Ruhe, seiner politischen Brillanz und seiner Gabe, Menschen wie Schachfiguren zu lenken. Ich möchte diese ikonische Figur mit absolutem Respekt vor der Lore spielen und dem Thronsaal auf eurem Server echtes Leben, Ehrfurcht und Spannung verleihen.
-
----
-
-### 👑 4. Warum Du? (Warum Nico Kaschube / Imperator Keksi?) [Pflichtangabe]
-Ich bringe die nötige Erfahrung, Zuverlässigkeit und vor allem die richtige Haltung mit:
-- **Verantwortung statt Machtmissbrauch:** Der Imperator existiert nicht, um andere grundlos herumzukommandieren, sondern um die Story voranzutreiben und anderen Spielern (vom Kadetten bis zum Admiral) bedeutsame Bühnen zu bieten.
-- **Das Bäckerei-Prinzip:** *„Was ist ein Imperium ohne seine Untergebenen? Eine ziemlich große Bäckerei ohne Kundschaft!“* – Mir ist wichtig, dass alle Beteiligten maximalen Spielspaß haben.
-- **Der Keksi-Faktor:** Eine gesunde Prise Humor, Nahbarkeit und Motivation für das Server-Klima, gepaart mit absoluter Ernsthaftigkeit im RP.
-
----
-
-### 📜 5. Meine Pläne für das Imperium (RP-Konzept)
-- Regelmäßige imperiale Audienzen im Thronsaal.
-- Politische Gespräche & kaiserliche Dekrete.
-- Strategische Kriegsplanungen & Lagebesprechungen am Holotisch.
-- Feierliche Beförderungen & Auszeichnungen verdienter Mitglieder.
-- Spannungsreiches RP zwischen Militär, Senat und Inquisitorium.
-
----
-
-### 🌌 6. Wer ist Palpatine & wie spiele ich ihn?
-Sheev Palpatine, besser bekannt als Darth Sidious, gehört zu den einflussreichsten Sith-Lords der Geschichte. Geboren auf Naboo, stieg er durch Geduld und Täuschung bis zum Kanzler und schließlich zum Imperator auf. Ich spiele Palpatine durch würdevolle Ruhe, subtile Manipulation und weitsichtige Staatskunst – ein Imperator muss nicht brüllen, um gehört zu werden.
-
----
-
-### 🍪 7. Schlusswort [Pflichtangabe]
-Zum Abschluss möchte ich mich herzlich für die Zeit und Aufmerksamkeit bedanken, die ihr euch für meine Bewerbung nehmt. Ich würde mich sehr darüber freuen, Imperator Sheev Palpatine auf eurem Server verkörpern zu dürfen und gemeinsam mit der Community die Zukunft des Galaktischen Imperiums zu gestalten.
-
-Möge die dunkle Seite der Macht mit euch sein.
-
-Und denkt immer daran:
-> **Die Galaxis gehört dem Imperium. Die Kekse gehören Imperator Keksi.**
-
-Mit imperialen Grüßen,
-
-**Nico Kaschube**
-*Imperator Keksi | Cookie Milky | Kekse*
-**Für das Imperium. Für die Ordnung. Für die Kekse! 🍪⚡**`;
-
 function setupModals() {
   const audienceModal = document.getElementById('audienceModal');
-  const discordModal = document.getElementById('discordModal');
 
   // Open Audience Preview
-  document.getElementById('openAudienceDemoBtn').addEventListener('click', () => {
-    audio.playBeep(440, 0.08);
-    audienceModal.classList.add('open');
-  });
+  const openBtn = document.getElementById('openAudienceDemoBtn');
+  if (openBtn) {
+    openBtn.addEventListener('click', () => {
+      audio.playBeep(440, 0.08);
+      if (audienceModal) audienceModal.classList.add('open');
+    });
+  }
 
   // Close Audience Preview
-  document.getElementById('closeModalBtn').addEventListener('click', () => {
-    audienceModal.classList.remove('open');
-  });
-  document.getElementById('closeModalBtn2').addEventListener('click', () => {
-    audienceModal.classList.remove('open');
-  });
-
-  // Open Discord Export Modal
-  const openDiscordModal = () => {
-    audio.playBeep(440, 0.08);
-    document.getElementById('discordTextarea').value = discordTemplateText;
-    discordModal.classList.add('open');
-  };
-
-  document.getElementById('copyDiscordBtn').addEventListener('click', openDiscordModal);
-
-  // Close Discord Modal
-  document.getElementById('closeDiscordModalBtn').addEventListener('click', () => {
-    discordModal.classList.remove('open');
-  });
-  document.getElementById('closeDiscordModalBtn2').addEventListener('click', () => {
-    discordModal.classList.remove('open');
-  });
-
-  // Copy Action
-  document.getElementById('doCopyDiscordBtn').addEventListener('click', () => {
-    navigator.clipboard.writeText(discordTemplateText).then(() => {
-      audio.playBeep(660, 0.1);
-      showToast('📋 Vollständiger Bewerbungstext in die Zwischenablage kopiert!');
-    }).catch(err => {
-      showToast('⚠️ Bitte Text manuell aus dem Feld kopieren.');
+  const closeBtn1 = document.getElementById('closeModalBtn');
+  if (closeBtn1) {
+    closeBtn1.addEventListener('click', () => {
+      if (audienceModal) audienceModal.classList.remove('open');
     });
-  });
+  }
+
+  const closeBtn2 = document.getElementById('closeModalBtn2');
+  if (closeBtn2) {
+    closeBtn2.addEventListener('click', () => {
+      if (audienceModal) audienceModal.classList.remove('open');
+    });
+  }
 
   // Backdrop click to close
   window.addEventListener('click', (e) => {
-    if (e.target === audienceModal) audienceModal.classList.remove('open');
-    if (e.target === discordModal) discordModal.classList.remove('open');
+    if (audienceModal && e.target === audienceModal) {
+      audienceModal.classList.remove('open');
+    }
   });
 }
 
