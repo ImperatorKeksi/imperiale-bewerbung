@@ -2097,19 +2097,18 @@ body.fx-lit .throne-img {
 /* ===================================================================
    EPISCHE IMPERIALE STARTSEQUENZ
    =================================================================== */
-/* === BLITZLICHT- & INTRO-MODUL (ORIGINAL FX-INTRO) === */
+/* === BLITZLICHT- & INTRO-MODUL (ORIGINAL AUS IMPERIALE-BEWERBUNGAFSAFA) === */
 #fx-intro {
   position: fixed;
   inset: 0;
   z-index: 2400;
-  background: radial-gradient(circle at center, rgba(16, 20, 30, 0.94) 0%, rgba(3, 4, 8, 0.98) 100%);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: #000;
   display: grid;
   place-items: center;
   text-align: center;
   padding: 1.5rem;
-  transition: opacity 0.8s ease, visibility 0.8s ease;
+  transition: opacity 1.2s, visibility 1.2s;
+  animation: fxout 1s 25s forwards;
 }
 
 #fx-intro.out {
@@ -2118,24 +2117,26 @@ body.fx-lit .throne-img {
   pointer-events: none;
 }
 
+@keyframes fxout {
+  to { opacity: 0; visibility: hidden; pointer-events: none; }
+}
+
 #fx-intro .l {
   font-family: var(--font-serif);
   letter-spacing: .2em;
   color: #fff;
-  opacity: 1;
-  transition: opacity 0.6s ease;
+  opacity: 0;
+  transition: opacity 1.4s;
   margin: .5rem 0;
+}
+
+#fx-intro .l.on {
+  opacity: 1;
 }
 
 #fx-intro .a {
   font-size: clamp(1.4rem, 5vw, 2.6rem);
   text-shadow: 0 0 30px rgba(0, 243, 255, .6);
-  animation: introGlowPulse 2s infinite alternate ease-in-out;
-}
-
-@keyframes introGlowPulse {
-  0% { text-shadow: 0 0 20px rgba(0, 243, 255, 0.4); }
-  100% { text-shadow: 0 0 40px rgba(0, 243, 255, 0.9), 0 0 15px rgba(255, 255, 255, 0.8); }
 }
 
 #fx-intro .b {
@@ -2148,48 +2149,51 @@ body.fx-lit .throne-img {
   flex-direction: column;
   align-items: center;
   gap: 14px;
-  margin-top: 2rem;
+  margin-top: 1.6rem;
 }
 
 .fxb {
-  margin: 0;
-  opacity: 1;
-  visibility: visible;
-  font: 700 0.95rem var(--font-tech, sans-serif);
+  margin: 0 .3rem;
+  opacity: 0;
+  visibility: hidden;
+  font: 700 .9rem var(--font-tech, sans-serif);
   letter-spacing: .18em;
   text-transform: uppercase;
-  background: linear-gradient(135deg, var(--imperial-red, #e01a22), #99000a);
+  background: var(--imperial-red, #e01a22);
   color: #fff;
-  border: 1px solid var(--imperial-red-bright, #ff2d37);
-  padding: 1.05rem 2.2rem;
+  border: 1px solid var(--imperial-red, #e01a22);
+  padding: .9rem 1.8rem;
   cursor: pointer;
-  box-shadow: 0 0 35px rgba(224, 26, 34, .65);
+  box-shadow: 0 0 30px rgba(224, 26, 34, .6);
   border-radius: 4px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.4s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.fxb.epic-btn:hover {
+.fxb:hover {
   transform: translateY(-2px) scale(1.04);
   box-shadow: 0 0 50px rgba(224, 26, 34, .95), 0 0 20px rgba(0, 243, 255, 0.4);
 }
 
-.fxb.alt.sub-btn {
+.fxb.alt {
   background: transparent;
   box-shadow: none;
   border: none;
   color: var(--text-muted, #8b99ae);
   font-size: 0.85rem;
-  letter-spacing: 0.12em;
-  padding: 0.4rem 1rem;
   text-decoration: underline;
   text-underline-offset: 4px;
 }
 
-.fxb.alt.sub-btn:hover {
-  color: #ffffff;
+.fxb.alt:hover {
+  color: #fff;
   transform: none;
   box-shadow: none;
-  border: none;
+}
+
+.fxb.on {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1s;
 }
 
 

@@ -965,36 +965,37 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Startsequenz (fx-intro)
+  // Startsequenz (fx-intro) - Exakt wie in imperiale-bewerbungafsafa
   const it = document.getElementById('fx-intro');
   let hasEntered = false;
 
-  function enter() {
+  function enter(snd = true) {
     if (hasEntered) return;
     hasEntered = true;
     document.body.style.overflow = '';
     if (it) it.classList.add('out');
 
-    audio.startSound();
-    const b = document.getElementById('toggleAudioBtn');
-    if (b && audio.isMuted) {
-      audio.toggleSound();
+    if (snd) {
+      audio.startSound();
+      const b = document.getElementById('toggleAudioBtn');
+      if (b && audio.isMuted) {
+        audio.toggleSound();
+      }
+      setTimeout(() => {
+        audio.playImperialFanfare();
+      }, 350);
     }
-    setTimeout(() => {
-      audio.playImperialFanfare();
-    }, 350);
 
     triggerLightningStorm();
     flash(1);
     setTimeout(thunder, 300);
     setTimeout(() => {
       if (it) it.remove();
-      showToast('⚡ Das Imperium ist auferstanden! Tipp: Auf den Imperator oder Hintergrund klicken zum Zappen.');
+      showToast('⚡ Das Imperium ist auferstanden! Tipp: Auf den Thronsaal oder Hintergrund klicken zum Zappen.');
     }, 1300);
   }
 
-  // Sofortige Audio-Aktivierung beim Laden & bei erster Bewegung
-  audio.startSound();
+  // Sofortige Audio-Aktivierung bei erster Berührung
   const unlockAudio = () => {
     audio.startSound();
     if (audio.ctx && audio.ctx.state === 'suspended') {
@@ -1008,35 +1009,49 @@ document.addEventListener('DOMContentLoaded', () => {
   if (it && !rm) {
     document.body.style.overflow = 'hidden';
 
+    // Original-Choreografie aus imperiale-bewerbungafsafa mit abgestimmtem Blitz-Timing
+    setTimeout(() => { strike(window.innerWidth * 0.5, 1, true); }, 500);
+    setTimeout(() => {
+      const f1 = document.getElementById('fx1');
+      if (f1) f1.classList.add('on');
+      strike(window.innerWidth * 0.3, 1, true);
+    }, 1300);
+    setTimeout(() => {
+      const f2 = document.getElementById('fx2');
+      if (f2) f2.classList.add('on');
+    }, 2600);
+    setTimeout(() => {
+      strike(window.innerWidth * 0.7, 1, true);
+      const b1 = document.getElementById('fx-go');
+      const b2 = document.getElementById('fx-go2');
+      if (b1) b1.classList.add('on');
+      if (b2) b2.classList.add('on');
+    }, 3600);
+
     const b1 = document.getElementById('fx-go');
     const b2 = document.getElementById('fx-go2');
-    if (b1) b1.addEventListener('click', (e) => { e.stopPropagation(); enter(); });
-    if (b2) b2.addEventListener('click', (e) => { e.stopPropagation(); enter(); });
+    if (b1) b1.addEventListener('click', (e) => { e.stopPropagation(); enter(true); });
+    if (b2) b2.addEventListener('click', (e) => { e.stopPropagation(); enter(false); });
 
-    // Klick auf den Bildschirm oder Tastendruck betritt die Seite sofort
+    // Klick auf den Bildschirm oder Tastendruck betritt die Seite
     it.addEventListener('click', (e) => {
       if (e.target !== b1 && e.target !== b2) {
-        enter();
+        enter(true);
       }
     });
 
     window.addEventListener('keydown', (e) => {
       if (!hasEntered && (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape')) {
-        enter();
+        enter(true);
       }
     }, { once: true });
 
-    // Optionaler Blitz zur Untermalung kurz nach Start
+    // Automatischer Übergang nach 25 Sekunden falls nichts angeklickt wird
     setTimeout(() => {
-      if (!hasEntered) strike(window.innerWidth * 0.5, false, false);
-    }, 400);
-
-    // Automatischer sanfter Übergang nach 7 Sekunden falls keine Interaktion
-    setTimeout(() => {
-      if (!hasEntered) enter();
-    }, 7000);
+      if (!hasEntered) enter(true);
+    }, 25000);
   } else if (it) {
-    enter();
+    enter(true);
   }
 
   // Hover-Sound für interaktive Buttons
