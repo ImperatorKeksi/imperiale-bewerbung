@@ -1008,48 +1008,83 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (it && !rm) {
     document.body.style.overflow = 'hidden';
+    // Epische, dynamische Intro-Choreografie (sofort lebendig & atmosphärisch)
+    let introTimer = null;
 
-    // Original-Choreografie aus imperiale-bewerbungafsafa mit abgestimmtem Blitz-Timing
-    setTimeout(() => { strike(window.innerWidth * 0.5, 1, true); }, 500);
+    // 1. Sofortiger erster Machtblitz im Zentrum (wie im Screenshot)
     setTimeout(() => {
+      if (!hasEntered) strike(window.innerWidth * 0.5, 1, false);
+    }, 120);
+
+    // 2. Erster Text leuchtet auf
+    setTimeout(() => {
+      if (hasEntered) return;
       const f1 = document.getElementById('fx1');
       if (f1) f1.classList.add('on');
-      strike(window.innerWidth * 0.3, 1, true);
-    }, 1300);
+    }, 380);
+
+    // 3. Zweiter Blitz & Titel wird sichtbar
     setTimeout(() => {
+      if (hasEntered) return;
       const f2 = document.getElementById('fx2');
       if (f2) f2.classList.add('on');
-    }, 2600);
+      strike(window.innerWidth * 0.35, 1, false);
+    }, 850);
+
+    // 4. Dritter Blitz & Buttons erscheinen mit Glow
     setTimeout(() => {
-      strike(window.innerWidth * 0.7, 1, true);
+      if (hasEntered) return;
+      strike(window.innerWidth * 0.65, 1, false);
       const b1 = document.getElementById('fx-go');
       const b2 = document.getElementById('fx-go2');
       if (b1) b1.classList.add('on');
       if (b2) b2.classList.add('on');
-    }, 3600);
+    }, 1300);
+
+    // Laufende Hintergrund-Machtblitze solange das Intro geöffnet ist
+    introTimer = setInterval(() => {
+      if (!hasEntered && document.getElementById('fx-intro')) {
+        strike(window.innerWidth * (0.25 + Math.random() * 0.5), 0, false);
+      } else if (introTimer) {
+        clearInterval(introTimer);
+      }
+    }, 2900);
 
     const b1 = document.getElementById('fx-go');
     const b2 = document.getElementById('fx-go2');
-    if (b1) b1.addEventListener('click', (e) => { e.stopPropagation(); enter(true); });
-    if (b2) b2.addEventListener('click', (e) => { e.stopPropagation(); enter(false); });
+    if (b1) b1.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (introTimer) clearInterval(introTimer);
+      enter(true);
+    });
+    if (b2) b2.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (introTimer) clearInterval(introTimer);
+      enter(false);
+    });
 
     // Klick auf den Bildschirm oder Tastendruck betritt die Seite
     it.addEventListener('click', (e) => {
       if (e.target !== b1 && e.target !== b2) {
+        if (introTimer) clearInterval(introTimer);
         enter(true);
       }
     });
 
     window.addEventListener('keydown', (e) => {
       if (!hasEntered && (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape')) {
+        if (introTimer) clearInterval(introTimer);
         enter(true);
       }
     }, { once: true });
 
-    // Automatischer Übergang nach 25 Sekunden falls nichts angeklickt wird
+    // Automatischer Übergang nach 20 Sekunden falls keine Eingabe erfolgt
     setTimeout(() => {
-      if (!hasEntered) enter(true);
-    }, 25000);
+      if (!hasEntered) {
+        if (introTimer) clearInterval(introTimer);
+        enter(true);
+      }
+    }, 20000);
   } else if (it) {
     enter(true);
   }
